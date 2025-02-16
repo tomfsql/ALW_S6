@@ -1,9 +1,68 @@
 import Comic from "./Comic.mjs";
 
-// Récupérer le storyboard JSON à afficher
-const jsonUrl = document.getElementById('comicJson').href;
-let response = await fetch(jsonUrl);
-let comicData = await response.json()
+// Définition du storyboard à afficher
+let comicData = {
+    comic: {
+        title: "Les pirates du code",
+        author: "Yannick Joly",
+        created: "2025-02-01"
+    },
+    strip: {
+        title: "#001 Trois blagues",
+        created: "2025-02-02"
+    },
+    panels: [
+        {
+            background: "background",
+            actors: {
+                left: "maximeColèreIndex",
+                center: "maximeSilence",
+                right: "maximeParleBrasOuverts"
+            },
+            bubbles: [
+                {
+                    speaker: "left",
+                    text: "Votre code est sans nul\ndoute le plus pitoyable\nque j'ai vu tourner !"
+                },
+                {
+                    speaker: "right",
+                    text: "Au moins, il tourne !"
+                }
+            ]
+        },
+        {
+            backgroundPosition: {
+                x: 90
+            },
+            actors: {
+                center: "maximeParle",
+                right: "maximeSouritBrasOuverts"
+            },
+            bubbles: [
+                {
+                    speaker: "right",
+                    text: "Mec, j'ai piqué ton code !"
+                },
+                {
+                    speaker: "center",
+                    text: "Ce code n'est pas de moi !"
+                }
+            ]
+        },
+        {
+            bubbles: [
+                {
+                    speaker: "center",
+                    text: "Pourquoi on code\ntoujours de nuit ?"
+                },
+                {
+                    speaker: "right",
+                    text: "Parce que c'est quand\nles bugs dorment !"
+                }
+            ]
+        }
+    ]
+};
 
 // Récupérer le contexte du canvas qui va accueillir la BD
 let canvas = document.getElementsByTagName('canvas')[0];
