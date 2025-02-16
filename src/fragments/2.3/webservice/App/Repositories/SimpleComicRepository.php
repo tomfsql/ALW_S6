@@ -11,6 +11,13 @@ class SimpleComicRepository {
         $this->storage = new FileStorage('Data/SimpleComics');
     }
 
+    /**
+     * Retourne les données (décodées) d'un SimpleComic
+     *
+     * @param string $comicId  nom court de la BD
+     * @param integer $stripId id de la planche
+     * @return array|null
+     */
     public function getSimpleComic(string $comicId, int $stripId): ?array {
         return $this->storage->readJson("$comicId/strip-$stripId.json");
     }
