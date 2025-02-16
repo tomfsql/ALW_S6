@@ -1,0 +1,12 @@
+{
+    "bubbles": [
+        {
+            "speaker": "center",
+            "text": "Pourquoi on code\ntoujours de nuit ?"
+        },
+        {
+            "speaker": "right",
+            "text": "Parce que c'est quand\nles bugs dorment !"
+        }
+    ]
+}

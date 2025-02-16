@@ -1,0 +1,19 @@
+{
+    "backgroundPosition": {
+        "x": 90
+    },
+    "actors": {
+        "center": "maximeParle",
+        "right": "maximeSouritBrasOuverts"
+    },
+    "bubbles": [
+        {
+            "speaker": "right",
+            "text": "Mec, j'ai piqué ton code !"
+        },
+        {
+            "speaker": "center",
+            "text": "Ce code n'est pas de moi !"
+        }
+    ]
+}
