@@ -2,8 +2,8 @@ services:
   site:
     container_name: site
     build:
-      context: .
-      dockerfile: conf/site/Dockerfile
+      context: ./conf/site
+      dockerfile: ../../Dockerfile
     restart: on-failure
     ports:
       - 50180:80
@@ -14,8 +14,8 @@ services:
   webservice:
     container_name: webservice
     build:
-      context: .
-      dockerfile: conf/webservice/Dockerfile
+      context: ./conf/webservice
+      dockerfile: ../../Dockerfile
     restart: on-failure
     ports:
       - 50181:80
