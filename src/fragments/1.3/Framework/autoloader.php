@@ -10,9 +10,12 @@ spl_autoload_register(function ($class) {
     if (substr($class, 0, strlen($baseFramework)) == $baseFramework) {
         // framework classes: remove "CPE/" in the path
         $classPath = substr($classPath, 4);
-    } elseif (substr($class, 0, strlen($baseApp)) != $baseApp) {
-        // classes that are not in "CPE\Framework" nor "App" namespaces: error
-        throw new LogicException('Unhandled class namespace: "' . $class . '"');
+
+    // commented to enable Twig autoloading:
+    // } elseif (substr($class, 0, strlen($baseApp)) != $baseApp) {
+    //     // classes that are not in "CPE\Framework" nor "App" namespaces: error
+    //     throw new LogicException('Unhandled class namespace: "' . $class . '"');
+
     }
 
     // make sure the file exists
