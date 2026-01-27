@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y unzip git \
     && rm -rf /var/lib/apt/lists/*
 # curl déjà présent ?
 
-# Installer Composer
+# Installer Composer (nécessite curl, git et unzip)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Installer et activer XDebug
