@@ -27,11 +27,11 @@ class SaveRepository
     public function initSave(string $username): void
     {
         if (!$this->exists($username)) {
-            copy($this->initialSavePath, $this->storage->getBasePath() . $username . ".json");
+            copy($this->initialSavePath, $this->storage->getBasePath().$username.".json");
         }
     }
 
-    public function load(string $username): object
+    public function load(string $username): array
     {
         if (!$this->exists($username)) {
             $this->initSave($username);

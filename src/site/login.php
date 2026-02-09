@@ -3,17 +3,20 @@
 require_once "Utils/User.php";
 require_once "Utils/FileStorage.php";
 require_once "Utils/UserRepository.php";
+require_once "Utils/SaveRepository.php";
 
 // session_start();
 $error = null;
 
-$repo = new UserRepository("Data/users.json");
+$userRepo = new UserRepository("Data/users.json");
+$saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
+
 // exemples d'utilisation :
 // $user = $repo->get($login);
 // $users = $repo->getAll();
 
-// var_dump($_SERVER);
-// var_dump($_SERVER['REQUEST_METHOD']);
+var_dump($_SERVER);
+var_dump($_SERVER['REQUEST_METHOD']);
 
 // TODO: gérer ici la connexion lors de la soumission du formulaire
 
@@ -91,11 +94,18 @@ $repo = new UserRepository("Data/users.json");
         <h2>Connexion</h2>
         <input type="text" name="username" placeholder="Nom d'utilisateur" required autocomplete="off">
         <input type="password" name="password" placeholder="Mot de passe" required autocomplete="off">
-
-        <?php if (empty($error) == false) { ?>
-            <div class="error"><?php echo $error; ?></div>
+        <?php $username = $_POST['username'] ?? null; ?>
+        <?php $password = $_POST['password'] ?? null; ?>
+        <?php if ( !isset($username) && !$saveRepo->exists($username)) { ?>
+            <div class="error">Utilisateur non trouvé</div>
+            <?php $error = "Utilisateur non-trouvé"; ?>
+        <?php } else if (!isset($username) && password_verify($password, $userRepo->get($username)->passwordHash) == false) { ?>
+            <div class="error">Mot de passe incorrect</div>
+        <?php $error = "Mot de passe incorrect"; ?>
+        <?php } else if(isset($username) && isset($password) && ($userRepo->get($username) != null) && password_verify($password, $userRepo->get($username)->passwordHash) == true) { ?>
+            <div class="success">Connexion réussie !</div>
         <?php } ?>
-
+        <?php if(isset($username)) { $save = $saveRepo->load($username); }   ?>
         <button type="submit">Se connecter</button>
     </form>
 </body>
