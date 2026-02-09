@@ -3,13 +3,8 @@
 // namespace App\Repositories;
 
 // use App\Models\User;
+// use Exception;
 
-// Attention : tous les require/include se font relativement au script exécuté
-// require_once "App/Models/User.php";
-
-/**
- * Undocumented class
- */
 class UserRepository
 {
     private string $filePath;
@@ -42,7 +37,7 @@ class UserRepository
         foreach ($data as $login => $userData) {
             $user = new User();
             $user->login = $login;
-            $user->password = $userData['password'];
+            $user->password_hash = $userData['password_hash'];
 
             $this->users[$user->login] = $user;
         }

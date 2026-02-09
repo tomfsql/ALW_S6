@@ -4,5 +4,5 @@
 
 class User {
     public string $login;
-    public string $password;
+    public string $password_hash;
 }

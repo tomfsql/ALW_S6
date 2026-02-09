@@ -1,6 +1,7 @@
 <?php
 
 require_once "Utils/User.php";
+require_once "Utils/FileStorage.php";
 require_once "Utils/UserRepository.php";
 
 // session_start();

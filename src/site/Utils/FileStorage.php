@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Utilities;
+// namespace App\Utilities;
 
 class FileStorage {
     private string $basePath;
 
     public function __construct(string $basePath) {
         $this->basePath = rtrim($basePath, '/') . '/';
+    }
+
+    public function getBasePath(): string {
+        return $this->basePath;
     }
 
     public function listDirectories(string $path): array {
@@ -31,12 +35,12 @@ class FileStorage {
         }));
     }
 
-    public function readJson(string $path): ?array {
+    public function readJson(string $path): ?object {
         $fullPath = $this->basePath . $path;
-        return file_exists($fullPath) ? json_decode(file_get_contents($fullPath), true) : null;
+        return file_exists($fullPath) ? json_decode(file_get_contents($fullPath), false) : null;
     }
 
-    public function writeJson(string $path, array $data): bool {
+    public function writeJson(string $path, array|object $data): bool {
         $fullPath = $this->basePath . $path;
         if (!is_dir(dirname($fullPath))) {
             mkdir(dirname($fullPath), 0777, true);
