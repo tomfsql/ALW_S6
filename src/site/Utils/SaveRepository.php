@@ -21,11 +21,13 @@ class SaveRepository
 
     public function exists(string $username): bool
     {
-        return file_exists($this->storage->getBasePath() . $username . ".json");
+        return file_exists($this->storage->getBasePath().$username.".json");
     }
 
     public function initSave(string $username): void
     {
+        $initialSavePath = __DIR__ . '/../Data/Saves/test.json';
+        $targetPath = __DIR__ . '/../Data/Saves/' . $username . '.json';
         if (!$this->exists($username)) {
             copy($this->initialSavePath, $this->storage->getBasePath().$username.".json");
         }
