@@ -15,8 +15,8 @@ $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
 // $user = $repo->get($login);
 // $users = $repo->getAll();
 
-// var_dump($_SERVER);
-// var_dump($_SERVER['REQUEST_METHOD']);
+//var_dump($_SERVER);
+//var_dump($_SERVER['REQUEST_METHOD']);
 
 // TODO: gérer ici la connexion lors de la soumission du formulaire
 
@@ -96,13 +96,13 @@ $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
         <input type="password" name="password" placeholder="Mot de passe" required autocomplete="off">
         <?php $username = $_POST['username'] ?? null; ?>
         <?php $password = $_POST['password'] ?? null; ?>
-        <?php if (isset($username) && !$saveRepo->exists($username)) { ?>
+        <?php if ( !isset($username) && !$saveRepo->exists($username)) { ?>
             <div class="error">Utilisateur non trouvé</div>
             <?php $error = "Utilisateur non-trouvé"; ?>
-        <?php } else if (isset($username) && password_verify($password, $userRepo->get($username)->passwordHash) == false) { ?>
+        <?php } else if (!isset($username) && password_verify($password, $userRepo->get($username)->passwordHash) == false) { ?>
             <div class="error">Mot de passe incorrect</div>
         <?php $error = "Mot de passe incorrect"; ?>
-        <?php } else if(isset($username) && isset($password) && ($userRepo->get($username) != null) && password_verify($password, $userRepo->get($username)->passwordHash) == true) { ?>
+        <?php } else if(isset($username) && isset($username->passwordHash) && ($userRepo->get($username) != null) && password_verify($password, $userRepo->get($username)->passwordHash) == true) { ?>
             <div class="success">Connexion réussie !</div>
         <?php } ?>
         <?php if(isset($username)) { $save = $saveRepo->load($username); }   ?>

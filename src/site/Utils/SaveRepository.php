@@ -28,12 +28,24 @@ class SaveRepository
     {
         $initialSavePath = __DIR__ . '/../Data/Saves/test.json';
         $targetPath = __DIR__ . '/../Data/Saves/' . $username . '.json';
+        $dossierDestination = dirname($targetPath);
+        if (!is_dir($dossierDestination)) {
+            if (!mkdir($dossierDestination, 0777, true)) {
+                die("ERREUR FATALE : Impossible de créer le dossier : " . $dossierDestination);
+            }
+        }
+        if (!is_writable($dossierDestination)) {
+            chmod($dossierDestination, 0777);
+            if (!is_writable($dossierDestination)) {
+                die("ERREUR FATALE : PHP n'a pas le droit d'écrire dans : " . $dossierDestination);
+            }
+        }
         if (!$this->exists($username)) {
             copy($this->initialSavePath, $this->storage->getBasePath().$username.".json");
         }
     }
 
-    public function load(string $username): array
+    public function load(string $username): object
     {
         if (!$this->exists($username)) {
             $this->initSave($username);
