@@ -45,7 +45,7 @@ class SaveRepository
         }
     }
 
-    public function load(string $username): object
+    public function load(string $username): array
     {
         if (!$this->exists($username)) {
             $this->initSave($username);

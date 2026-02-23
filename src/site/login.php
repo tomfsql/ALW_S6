@@ -1,27 +1,43 @@
 <?php
-
+session_start();
 require_once "Utils/User.php";
 require_once "Utils/FileStorage.php";
 require_once "Utils/UserRepository.php";
 require_once "Utils/SaveRepository.php";
 
-// session_start();
 $error = null;
+$success = null;
 
+// Initialisation des dépôts
 $userRepo = new UserRepository("Data/users.json");
 $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
 
-// exemples d'utilisation :
-// $user = $repo->get($login);
-// $users = $repo->getAll();
+if (isset($_SESSION['username'])) {
+    $success = "Vous êtes déjà connecté en tant que " . htmlspecialchars($_SESSION['username']) . " !";
+}
+else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-//var_dump($_SERVER);
-//var_dump($_SERVER['REQUEST_METHOD']);
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-// TODO: gérer ici la connexion lors de la soumission du formulaire
+    if (empty($username) || empty($password)) {
+        $error = "Veuillez remplir tous les champs.";
+    } else {
+        $user = $userRepo->get($username);
 
+        if ($user && password_verify($password, $user->password_hash)) {
+            $success = "Connexion réussie !";
+            $_SESSION['username'] = $username;
 
-?><!DOCTYPE html>
+            $saveRepo->load($username);
+        } else {
+            $error = "Identifiant ou mot de passe incorrect";
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -89,24 +105,27 @@ $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
         }
     </style>
 </head>
-<body>
-    <form action="" method="POST" class="loginForm">
-        <h2>Connexion</h2>
-        <input type="text" name="username" placeholder="Nom d'utilisateur" required autocomplete="off">
-        <input type="password" name="password" placeholder="Mot de passe" required autocomplete="off">
-        <?php $username = $_POST['username'] ?? null; ?>
-        <?php $password = $_POST['password'] ?? null; ?>
-        <?php if ( !isset($username) && !$saveRepo->exists($username)) { ?>
-            <div class="error">Utilisateur non trouvé</div>
-            <?php $error = "Utilisateur non-trouvé"; ?>
-        <?php } else if (!isset($username) && password_verify($password, $userRepo->get($username)->passwordHash) == false) { ?>
-            <div class="error">Mot de passe incorrect</div>
-        <?php $error = "Mot de passe incorrect"; ?>
-        <?php } else if(isset($username) && isset($username->passwordHash) && ($userRepo->get($username) != null) && password_verify($password, $userRepo->get($username)->passwordHash) == true) { ?>
-            <div class="success">Connexion réussie !</div>
-        <?php } ?>
-        <?php if(isset($username)) { $save = $saveRepo->load($username); }   ?>
-        <button type="submit">Se connecter</button>
-    </form>
+<?php if ($success !== null): ?>
+        <div class="loginForm" style="text-align: center;">
+            <p style="color: #4AF626; font-weight: bold;"><?= $success ?></p>
+            <p><a href="logout.php">Se déconnecter</a></p>
+        </div>
+        
+    <?php else: ?>
+        <form action="" method="POST" class="loginForm">
+            <h2>Connexion</h2>
+            
+            <input type="text" name="username" placeholder="Nom d'utilisateur" required autocomplete="off" 
+                   value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
+                   
+            <input type="password" name="password" placeholder="Mot de passe" required autocomplete="off">
+            
+            <?php if ($error !== null): ?>
+                <div class="error"><?= $error ?></div>
+            <?php endif; ?>
+            
+            <button type="submit">Se connecter</button>
+        </form>
+    <?php endif; ?>
 </body>
 </html>
