@@ -1,12 +1,17 @@
 <?php
 
 require_once "Utils/GameConfigRepository.php";
+require_once "Data/Config/game_config_extended.json";
+require_once "Data/saves/bean.json";
 
 session_start();
 $error = null;
 
 $gameRepo = new GameConfigRepository("Data/gameconfig.json");
 $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
+$configContent = file_get_contents("Data/Config/game_config_extended.json");
+$userContent = file_get_contents("Data/saves/bean.json");
+
 
 // exemples d'utilisation :
 // $user = $repo->get($login);
