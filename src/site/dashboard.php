@@ -55,7 +55,7 @@ $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
             foreach ($products as $productName => $product) {
                 echo "<article id='product-$productName'>";
                 echo "<h3>{$product->icon} {$product->name}</h3>";
-                echo "<div>Stock : <output class='stock'>0</output></div>";
+                echo "<div>Stock : <output class='stock'>{$product->quantity}</output></div>";
                 echo "</article>";
             }
         ?>
@@ -70,6 +70,18 @@ $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
 
     <section id="buildings">
         <h2>Bâtiments</h2>
+
+        <?php
+
+
+            $products = $gameRepo->getBuildings();
+            foreach ($products as $productName => $product) {
+                echo "<article id='product-$productName'>";
+                echo "<h3>{$product->icon} {$product->name}</h3>";
+                echo "<div>Stock : <output class='stock'>0</output></div>";
+                echo "</article>";
+            }
+        ?>
 
         <article id="building-champ_ble">
             <h3>Champ de blé (Niv. <output class="level">1</output>)</h3>
