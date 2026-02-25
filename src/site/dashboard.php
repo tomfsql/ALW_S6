@@ -71,10 +71,10 @@ else{
             <?php
 
 
-                $products = $gameRepo->getBuildings();
-                foreach ($products as $productName => $product) {
-                    echo "<article id='product-$productName'>";
-                    echo "<h3>{$product->icon} {$product->name}</h3>";
+                $buidlings = $gameRepo->getBuildings();
+                foreach ($buildings as $buildingName => $building) {
+                    echo "<article id='product-$buildingName'>";
+                    echo "<h3>{$building->icon} {$building->name}</h3>";
                     echo "<div>Stock : <output class='stock'>0</output></div>";
                     echo "</article>";
                 }
@@ -92,7 +92,7 @@ else{
             </article>
         </section>
         <?php } else { ?>
-            <div class="error" echo $error></div>
+            <div class="error"><?php echo $error; ?></div>
         <?php } ?>
     </body>
 
