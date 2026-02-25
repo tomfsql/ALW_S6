@@ -2,7 +2,7 @@
 
 require_once "Utils/GameConfigRepository.php";
 require_once "Data/Config/game_config_extended.json";
-require_once "Data/saves/bean.json";
+require_once "Data/Saves/bean.json";
 
 
 if (isset($_SESSION['username']) && session_status() == PHP_SESSION_ACTIVE){
