@@ -11,6 +11,7 @@ if (isset($_SESSION['username']) && session_status() == PHP_SESSION_ACTIVE){
     $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
     $configContent = file_get_contents("Data/Config/game_config_extended.json");
     $userContent = file_get_contents("Data/saves/bean.json");
+    $decoded_content = json_decode($userContent);
 }
 else{
     $error = "Contenu inaccessible";
