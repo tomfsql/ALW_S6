@@ -1,10 +1,10 @@
 <?php
 // http://localhost:50180/login.php
 session_start();
-require_once "Utils/User.php";
-require_once "Utils/FileStorage.php";
-require_once "Utils/UserRepository.php";
-require_once "Utils/SaveRepository.php";
+require_once "App/Models/User.php";
+require_once "App/Utilities/FileStorage.php";
+require_once "App/Repositories/UserRepository.php";
+require_once "App/Repositories/SaveRepository.php";
 $error = null;
 $success = null;
 
@@ -28,8 +28,6 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user && password_verify($password, $user->password_hash)) {
             $success = "Connexion réussie !";
             $_SESSION['username'] = $username;
-            session_status(PHP_SESSION_ACTIVE);
-
             $saveRepo->load($username);
         } else {
             $error = "Identifiant ou mot de passe incorrect";
@@ -50,7 +48,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php if ($success !== null): ?>
         <div class="loginForm" style="text-align: center;">
             <p style="color: #4AF626; font-weight: bold;"><?= $success ?></p>
-            <p><a href="logout.php">Se déconnecter</a></p>
+            <p><a href="dashboard.php">Se déconnecter</a></p>
         </div>
 
     <?php else: ?>

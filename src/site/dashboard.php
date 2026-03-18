@@ -1,6 +1,6 @@
 <?php
 
-require_once "Utils/GameConfigRepository.php";
+require_once "App/Repositories/GameConfigRepository.php";
 require_once "Data/Config/game_config_extended.json";
 require_once "Data/Saves/bean.json";
 
@@ -12,6 +12,7 @@ if (isset($_SESSION['username']) && session_status() == PHP_SESSION_ACTIVE){
     $configContent = file_get_contents("Data/Config/game_config_extended.json");
     $userContent = file_get_contents("Data/saves/bean.json");
     $decoded_content = json_decode($userContent);
+    $success = "Vous êtes déjà connecté en tant que " . htmlspecialchars($_SESSION['username']) . " !";
 }
 else{
     $error = "Contenu inaccessible";
@@ -45,6 +46,9 @@ else{
 <body>
     <?php if($error == null ) { ?>
         <h1>Ferme Manager</h1>
+
+        <p style="color: #4AF626; font-weight: bold;"><?= $success ?></p>
+
 
         <section id="inventory">
             <h2>Inventaire</h2>
