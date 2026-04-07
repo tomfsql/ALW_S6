@@ -14,7 +14,12 @@ if (isset($_SESSION['username']) && session_status() == PHP_SESSION_ACTIVE){
 }
 else{
     $error = "Contenu inaccessible";
-    http_response_code(401);
+    $_SESSION = [];
+    if(session_status() === PHP_SESSION_ACTIVE){
+        session_destroy();
+    }
+    header("Location:index.php?page=login");
+    exit;
 }
 
 
@@ -44,6 +49,12 @@ else{
 <body>
     <?php if($error == null ) { ?>
         <h1>Ferme Manager</h1>
+        <div style="text-align: right; margin-bottom: 20px;">
+            <a href="index.php?page=logout" class="logout-btn" style="color: red; text-decoration: none; font-weight: bold;">
+                Se déconnecter
+            </a>
+        </div>
+
 
         <p style="color: #4AF626; font-weight: bold;"><?= $success ?></p>
 
@@ -96,6 +107,7 @@ else{
         </section>
         <?php } else { ?>
             <div class="error"><?php echo $error; ?></div>
+            <p><a href="login.php">Se connecter</a></p>
         <?php } ?>
     </body>
 

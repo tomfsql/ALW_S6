@@ -1,6 +1,5 @@
 <?php
 // http://localhost:50180/login.php
-session_start();
 require_once "App/Models/User.php";
 require_once "App/Utilities/FileStorage.php";
 require_once "App/Repositories/UserRepository.php";
@@ -31,7 +30,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $saveRepo->load($username);
         } else {
             $error = "Identifiant ou mot de passe incorrect";
-            http_response_code : 403;
+            http_response_code(403);
         }
     }
 }
@@ -48,11 +47,11 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php if ($success !== null): ?>
         <div class="loginForm" style="text-align: center;">
             <p style="color: #4AF626; font-weight: bold;"><?= $success ?></p>
-            <p><a href="dashboard.php">Se déconnecter</a></p>
+            <p><a href="index.php?page=dashboard">Tableau de bord</a></p>
         </div>
 
     <?php else: ?>
-        <form action="" method="POST" class="loginForm">
+        <form action="index.php?page=login" method="POST" class="loginForm">
             <h2>Connexion</h2>
 
             <input type="text" name="username" placeholder="Nom d'utilisateur" required autocomplete="off" 

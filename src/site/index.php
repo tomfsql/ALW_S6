@@ -1,6 +1,7 @@
 <?php
-require_once 'login.php';
-require_once 'dashboard.php';
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
 $page = $_GET['page'] ?? 'login';
 
 switch ($page) {
@@ -10,6 +11,10 @@ switch ($page) {
 
     case 'login':
         require_once 'login.php';
+        break;
+
+    case 'logout':
+        require_once 'logout.php';
         break;
 
     default:

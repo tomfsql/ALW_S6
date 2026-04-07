@@ -2,7 +2,8 @@
 
 // namespace App\Repositories;
 
-// use App\Utilities\FileStorage;
+require_once dirname(__DIR__) . "/Utilities/FileStorage.php";
+require_once dirname(__DIR__) . "/Repositories/SaveRepository.php";
 // use Exception;
 
 class GameConfigRepository
