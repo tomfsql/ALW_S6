@@ -8,7 +8,7 @@
 class GameConfigRepository
 {
     private FileStorage $storage;
-    private object $config;
+    private array $config;
 
     public function __construct(string $filePath)
     {
@@ -25,12 +25,12 @@ class GameConfigRepository
         }
     }
 
-    public function getProducts(): object
+    public function getProducts(): array
     {
         return $this->config->products ?? [];
     }
 
-    public function getBuildings(): object
+    public function getBuildings(): array
     {
         return $this->config->buildings ?? [];
     }

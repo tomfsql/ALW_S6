@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // TODO: coder l'appel API pour récolter/produire une ressource depuis un bâtiment donné
         // IMPORTANT: Retournez la promesse du fetch avec le mot clé 'return'
         // ex: return fetch(...);
-        fetch('http://monUrl')
+        return fetch(`${API_URL}/harvest/building/${buildingId}`)
             .then((response) => response.json())
             .then((data) => {
             console.log(data);
@@ -39,7 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(`Amélioration demandée sur ${buildingId}`);
         // TODO: Coder l'appel API pour augmenter le niveau d'un bâtiment donné
         // IMPORTANT: Retournez la promesse du fetch avec le mot clé 'return'
-        // ex: return fetch(...);
+        return fetch(`${API_URL}/upgrade/building/${buildingId}`)
+            .then((response) => response.json())
+            .then((data) => {
+            console.log(data);
+            });
     });
 
     // Démarrage

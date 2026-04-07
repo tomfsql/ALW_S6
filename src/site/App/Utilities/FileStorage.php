@@ -35,9 +35,9 @@ class FileStorage {
         }));
     }
 
-    public function readJson(string $path): ?object {
+    public function readJson(string $path): array {
         $fullPath = $this->basePath . $path;
-        return file_exists($fullPath) ? json_decode(file_get_contents($fullPath), false) : null;
+        return file_exists($fullPath) ? json_decode(file_get_contents($fullPath), true) : [];
     }
 
     public function writeJson(string $path, array|object $data): bool {

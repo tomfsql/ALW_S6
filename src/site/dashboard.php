@@ -1,16 +1,14 @@
 <?php
 
 require_once "App/Repositories/GameConfigRepository.php";
-require_once "Data/Config/game_config_extended.json";
-require_once "Data/Saves/bean.json";
 
 
 if (isset($_SESSION['username']) && session_status() == PHP_SESSION_ACTIVE){
     $error = null;
-    $gameRepo = new GameConfigRepository("Data/gameconfig.json");
+    $gameRepo = new GameConfigRepository(__DIR__ ."/Data/Config/game_config.json");
     $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
     $configContent = file_get_contents("Data/Config/game_config_extended.json");
-    $userContent = file_get_contents("Data/saves/bean.json");
+    $userContent = file_get_contents(__DIR__ ."/Data/Saves/bean.json");
     $decoded_content = json_decode($userContent);
     $success = "Vous êtes déjà connecté en tant que " . htmlspecialchars($_SESSION['username']) . " !";
 }
@@ -76,7 +74,7 @@ else{
             <?php
 
 
-                $buidlings = $gameRepo->getBuildings();
+                $buildings = $gameRepo->getBuildings();
                 foreach ($buildings as $buildingName => $building) {
                     echo "<article id='product-$buildingName'>";
                     echo "<h3>{$building->icon} {$building->name}</h3>";
