@@ -39,7 +39,7 @@ $decoded_content = json_decode($userContent);
     <?php if($error == null ) { ?>
         <h1>Ferme Manager</h1>
         <div style="text-align: right; margin-bottom: 20px;">
-            <a href="index.php?page=logout" class="logout-btn" style="color: red; text-decoration: none; font-weight: bold;">
+            <a href="/logout" class="logout-btn" style="color: red; text-decoration: none; font-weight: bold;">
                 Se déconnecter
             </a>
         </div>

@@ -51,11 +51,11 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php if ($success !== null): ?>
         <div class="loginForm" style="text-align: center;">
             <p style="color: #4AF626; font-weight: bold;"><?= $success ?></p>
-            <p><a href="index.php?page=dashboard">Tableau de bord</a></p>
+            <p><a href="/dashboard">Tableau de bord</a></p>
         </div>
 
     <?php else: ?>
-        <form action="index.php?page=login" method="POST" class="loginForm">
+        <form action="/dashboard" method="POST" class="loginForm">
             <h2>Connexion</h2>
 
             <input type="text" name="username" placeholder="Nom d'utilisateur" required autocomplete="off" 

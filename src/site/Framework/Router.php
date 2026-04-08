@@ -61,6 +61,7 @@ class Router extends AbstractComponent
             if (!is_null($parameters)) {
                 $foundRoute = $route;
                 $foundRoute->foundParams = $parameters;
+                break;
             }
         }
 

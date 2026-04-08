@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-require_once __DIR__ ."/../Templates/login.php";
-require_once __DIR__ ."/../Templates/dashboard.php";
-
 use CPE\Framework\AbstractController;
 
 class DefaultController extends AbstractController
