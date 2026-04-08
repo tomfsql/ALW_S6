@@ -31,6 +31,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $success = "Connexion réussie !";
             $_SESSION['username'] = $username;
             $saveRepo->load($username);
+            header("Location: /dashboard");
         } else {
             $error = "Identifiant ou mot de passe incorrect";
             http_response_code(403);

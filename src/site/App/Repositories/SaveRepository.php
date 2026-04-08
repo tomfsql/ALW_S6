@@ -117,6 +117,6 @@ class SaveRepository
                 'last_harvest' => null
             ];
         }
-        $this->save($username, $save);
+        $this->save($username, (object)$save);
     }
 }

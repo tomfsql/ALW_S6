@@ -68,8 +68,7 @@ class Router extends AbstractComponent
         $get = $_GET;
         unset($get[$this->routeParamName]);
         if (empty($get) === false and is_null($foundRoute) === false and is_null($get) === false) {
-            if(!is_null($foundRoute->foundParams['get'])){
-
+            if(isset($foundRoute->foundParams['get']) and !is_null($foundRoute->foundParams['get'])){
                 $foundRoute->foundParams['get'] = $get;
             }
         }

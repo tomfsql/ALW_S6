@@ -5,28 +5,12 @@ require_once "App/Repositories/SaveRepository.php";
 
 use App\Repositories\GameConfigRepository;
 use App\Repositories\SaveRepository;
-
-
-
-if (isset($_SESSION['username']) && session_status() == PHP_SESSION_ACTIVE){
-    $error = null;
-    $gameRepo = new GameConfigRepository(__DIR__ ."/Data/Config/game_config.json");
-    $saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
-    $configContent = file_get_contents("Data/Config/game_config_extended.json");
-    $userContent = file_get_contents(__DIR__ ."/Data/Saves/bean.json");
-    $decoded_content = json_decode($userContent);
-    $success = "Vous êtes déjà connecté en tant que " . htmlspecialchars($_SESSION['username']) . " !";
-}
-else{
-    $error = "Contenu inaccessible";
-    $_SESSION = [];
-    if(session_status() === PHP_SESSION_ACTIVE){
-        session_destroy();
-    }
-    header("Location:index.php?page=login");
-    exit;
-}
-
+$gameRepo = new GameConfigRepository(dirname(__DIR__,2) ."/Data/Config/game_config.json");
+$error = null;
+$saveRepo = new SaveRepository("Data/Saves/", "Data/initialSave.json");
+$configContent = file_get_contents("Data/Config/game_config_extended.json");
+$userContent = file_get_contents(dirname(__DIR__,2) ."/Data/Saves/bean.json");
+$decoded_content = json_decode($userContent);
 
 
 // exemples d'utilisation :
