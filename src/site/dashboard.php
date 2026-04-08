@@ -1,6 +1,11 @@
 <?php
 
 require_once "App/Repositories/GameConfigRepository.php";
+require_once "App/Repositories/SaveRepository.php";
+
+use App\Repositories\GameConfigRepository;
+use App\Repositories\SaveRepository;
+
 
 
 if (isset($_SESSION['username']) && session_status() == PHP_SESSION_ACTIVE){

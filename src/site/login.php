@@ -1,9 +1,12 @@
 <?php
 // http://localhost:50180/login.php
-require_once "App/Models/User.php";
 require_once "App/Utilities/FileStorage.php";
 require_once "App/Repositories/UserRepository.php";
 require_once "App/Repositories/SaveRepository.php";
+
+use App\Repositories\UserRepository;
+use App\Repositories\SaveRepository;
+
 $error = null;
 $success = null;
 
