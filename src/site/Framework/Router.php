@@ -112,7 +112,7 @@ class Router extends AbstractComponent
 
         $parameters = [];
         $optionalParamsGiven = '';
-        
+
         //remove unnecessary match
         unset($matches[0]);
         //pop optional parameters if they exists

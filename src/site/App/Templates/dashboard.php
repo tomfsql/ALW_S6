@@ -44,10 +44,6 @@ $decoded_content = json_decode($userContent);
             </a>
         </div>
 
-
-        <p style="color: #4AF626; font-weight: bold;"><?= $success ?></p>
-
-
         <section id="inventory">
             <h2>Inventaire</h2>
             <?php
