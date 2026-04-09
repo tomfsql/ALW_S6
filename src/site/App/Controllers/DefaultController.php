@@ -76,11 +76,14 @@ class DefaultController extends AbstractController
         $products = $gameRepo->getProducts();
         $buildings = $gameRepo->getBuildings();
 
+        $username = $_SESSION['username'] ?? '';
+
         $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) .'/Templates');
         $twig = new \Twig\Environment($loader);
         echo $twig->render('dashboard.html.twig', ['error' => null, // Ou votre variable d'erreur si elle existe
             'products' => $products,
-            'buildings' => $buildings]);
+            'buildings' => $buildings,
+            'username' => $username]);
     }
 
     public function test()

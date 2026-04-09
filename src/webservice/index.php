@@ -1,24 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE){
-    session_start();
-}
-$page = $_GET['page'] ?? 'login';
+session_start();
+use App\Application;
 
-switch ($page) {
-    case 'dashboard':
-        require_once 'dashboard.php';
-        break;
+ini_set('display_errors', 'On');
 
-    case 'login':
-        require_once 'login.php';
-        break;
+require_once('Framework/autoloader.php');
 
-    case 'logout':
-        require_once 'logout.php';
-        break;
-
-    default:
-        require_once 'login.php';
-        break;
-}
-?>
+// start the application
+$app = new Application();
+$app->run();

@@ -1,8 +1,8 @@
 <?php
 
-// namespace App\Repositories;
+namespace App\Repositories;
 
-// use App\Utilities\FileStorage;
+use App\Utilities\FileStorage;
 
 class SaveRepository
 {
@@ -76,8 +76,9 @@ class SaveRepository
     public function setProduct(string $username, string $product, int $value): void
     {
         $save = $this->load($username);
-        $save->inventory->{$product} = $value;
-        $this->save($username, $save);
+        $saveObject = (object)$save;
+        $saveObject->inventory->{$product} = $value;
+        $this->save($username, $saveObject);
     }
 
     public function getBuildings(string $username): object
@@ -89,7 +90,8 @@ class SaveRepository
     public function getLevel(string $username, string $generator): int
     {
         $save = $this->load($username);
-        foreach ($save->buildings as $b) {
+        $saveObject = (object)$save;
+        foreach ($saveObject->buildings as $b) {
             if ($b->id === $generator) {
                 return $b->level;
             }
@@ -115,6 +117,6 @@ class SaveRepository
                 'last_harvest' => null
             ];
         }
-        $this->save($username, $save);
+        $this->save($username, (object)$save);
     }
 }

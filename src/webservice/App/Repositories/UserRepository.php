@@ -1,9 +1,11 @@
 <?php
+namespace App\Repositories;
 
-// namespace App\Repositories;
+require_once "App/Models/User.php";
 
-// use App\Models\User;
-// use Exception;
+
+use App\Models\User;
+use Exception;
 
 class UserRepository
 {
