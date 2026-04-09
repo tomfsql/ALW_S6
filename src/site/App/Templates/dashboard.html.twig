@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord - Ferme Manager{% endblock %}
+
+{% block content %}
+    <h1>Ferme Manager</h1>
+    <div style="text-align: right; margin-bottom: 20px;">
+        <a href="/logout" class="logout-btn" style="color: red; text-decoration: none; font-weight: bold;">
+            Se déconnecter
+        </a>
+    </div>
+
+    <section id="inventory">
+        <h2>Inventaire</h2>
+
+        {% for productName, product in products %}
+            <article id="product-{{ productName }}">
+                <h3>{{ product.icon }} {{ product.name }}</h3>
+                <div>Stock : <output class="stock">{{ product.quantity }}</output></div>
+            </article>
+        {% endfor %}
+
+        <article id="product-ble">
+            <h3>🌾 Blé</h3>
+            <div>Stock : <output class="stock">0</output></div>
+        </article>
+    </section>
+
+    <hr>
+
+    <section id="buildings">
+        <h2>Bâtiments</h2>
+
+        {% for buildingName, building in buildings %}
+            <article id="building-{{ buildingName }}">
+                <h3>{{ building.icon }} {{ building.name }}</h3>
+                <div>Stock : <output class="stock">0</output></div>
+            </article>
+        {% endfor %}
+
+        <article id="building-champ_ble">
+            <h3>Champ de blé (Niv. <output class="level">1</output>)</h3>
+            <button class="harvest">Récolter</button>
+            <button class="upgrade">
+                Améliorer <br>
+                Coût : <output class="cost">10 🌾</output>
+            </button>
+        </article>
+    </section>
+
+{% endblock %}

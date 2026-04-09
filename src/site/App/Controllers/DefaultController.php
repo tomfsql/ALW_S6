@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use CPE\Framework\AbstractController;
 
+$loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) .'/Templates');
+$twig = new \Twig\Environment($loader);
+
 class DefaultController extends AbstractController
 {
     public function index()
@@ -50,9 +53,12 @@ class DefaultController extends AbstractController
             }
         }
 
-        $this->app->view()->setParam('pageTitle', "Page de connexion !");
-        $this->app->view()->setParam('error', $error);
-        $this->app->view()->render('login.php');
+        $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) .'/Templates');
+        $twig = new \Twig\Environment($loader);
+
+        $lastUsername = $_POST['username'] ?? '';
+        echo $twig->render('login.html.twig', ['error' => null,
+            'username' => $lastUsername]);
     }
 
     public function dashboard()
@@ -69,14 +75,12 @@ class DefaultController extends AbstractController
 
         $products = $gameRepo->getProducts();
         $buildings = $gameRepo->getBuildings();
-        $success = "Vous êtes déjà connecté en tant que " . htmlspecialchars($_SESSION['username']) . " !";
 
-        $this->app->view()->setParam('pageTitle', "Tableau de bord !");
-        $this->app->view()->setParam('successMessage', $success);
-        $this->app->view()->setParam('products', $products);
-        $this->app->view()->setParam('buildings', $buildings);
-
-        $this->app->view()->render('dashboard.php');
+        $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) .'/Templates');
+        $twig = new \Twig\Environment($loader);
+        echo $twig->render('dashboard.html.twig', ['error' => null, // Ou votre variable d'erreur si elle existe
+            'products' => $products,
+            'buildings' => $buildings]);
     }
 
     public function test()
